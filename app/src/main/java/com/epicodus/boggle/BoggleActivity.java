@@ -29,6 +29,8 @@ public class BoggleActivity extends AppCompatActivity {
     private List<String> stringArray;
     public int counter;
     private TextView mCounter;
+    @Bind(R.id.guessedWord) TextView mGuessedWord;
+    private ArrayList<String> pointedWords = new ArrayList<String>();
 
 
     @Override
@@ -60,27 +62,27 @@ public class BoggleActivity extends AppCompatActivity {
                 Log.d(TAG, shuffledArray.toString());
                 counter = 0;
 
-
+                outerloop:
                 for ( int i = 0; i < stringArray.size(); i++ ) {
                     for (int j = 0; j < shuffledArray.size(); j++)
                     {
-                        if (stringArray.toArray()[i].equals(shuffledArray.toArray()[j]))  {
+                        if ((stringArray.toArray()[i].equals(shuffledArray.toArray()[j]) ))  {
                             counter += 1;
-                            Log.d(TAG, "yay");
                         } else {
-                            Log.d(TAG, "boo");
+                            Log.d(TAG, "your a knob");
                         }
-
                     }
-            }
+                }
                 mCounter.setText(String.valueOf(counter));
-                    Log.d(TAG, counter + "");
+                if (stringArray.size() >= 3) {
+                    pointedWords.add(word);
+                } else {
+                    Log.d(TAG, "nope");
+                }
+                Log.d(TAG, counter + "");
+                mGuessedWord.setText(pointedWords.toString());
 
             };
-
-
-
-
         });
     }
 }
