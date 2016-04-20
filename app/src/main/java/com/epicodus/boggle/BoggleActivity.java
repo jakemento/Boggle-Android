@@ -27,6 +27,8 @@ public class BoggleActivity extends AppCompatActivity {
     private EditText mUserWord;
     @Bind(R.id.submitAnswer) Button mSubmitAnswer;
     private List<String> stringArray;
+    public int counter;
+    private TextView mCounter;
 
 
     @Override
@@ -37,7 +39,7 @@ public class BoggleActivity extends AppCompatActivity {
 
 
         mDisplayLettersTextView = (TextView) findViewById(R.id.lettersArray);
-
+        mCounter = (TextView) findViewById(R.id.counter);
         Collections.shuffle(wordList);
         for (int i=0; i < 8; i++)
         {   shuffledArray.add(letters[i]);
@@ -55,12 +57,31 @@ public class BoggleActivity extends AppCompatActivity {
                 stringArray.remove(0);
                 //stringArray = mUserWord.toString().split(", ", mUserWord.length());
                 Log.d(TAG, stringArray.toString());
+                Log.d(TAG, shuffledArray.toString());
+                counter = 0;
+
+
+                for ( int i = 0; i < stringArray.size(); i++ ) {
+                    for (int j = 0; j < shuffledArray.size(); j++)
+                    {
+                        if (stringArray.toArray()[i].equals(shuffledArray.toArray()[j]))  {
+                            counter += 1;
+                            Log.d(TAG, "yay");
+                        } else {
+                            Log.d(TAG, "boo");
+                        }
+
+                    }
             }
+                mCounter.setText(String.valueOf(counter));
+                    Log.d(TAG, counter + "");
+
+            };
+
+
+
+
         });
-
-
-
-//        for ( int i=0; i < wordArray.length )
     }
 }
 
